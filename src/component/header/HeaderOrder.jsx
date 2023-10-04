@@ -6,17 +6,19 @@ import {
     InputBase,
     Stack,
     Typography,
+    useTheme,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
-import { useState } from "react";
+import {useState} from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+
 
 const Search = styled("div")(({ theme }) => ({
     flexGrow: 0.4,
@@ -59,9 +61,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         },
     },
 }));
+
+const options = ["All Categories", "CAR", "Clothes", "Electronics"];
 const HeaderOrder = () => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [selectedIndex, setSelectedIndex] = useState(1);
     const open = Boolean(anchorEl);
     const handleClickListItem = (event) => {
         setAnchorEl(event.currentTarget);
@@ -76,6 +80,8 @@ const HeaderOrder = () => {
         setAnchorEl(null);
     };
 
+    const theme = useTheme();
+
     return (
         <Container sx={{my: 3, display:"flex", justifyContent:"space-between"}}>
             <Stack alignItems={"center"}>
@@ -84,7 +90,9 @@ const HeaderOrder = () => {
             </Stack>
 
             <Search sx={{
-                borderRadius: "22px"
+                display : "flex",
+                borderRadius: "22px",
+                justifyContent: "space-between",
             }}>
                 <SearchIconWrapper>
                     <SearchIcon />
@@ -93,56 +101,61 @@ const HeaderOrder = () => {
                     placeholder="Search…"
                     inputProps={{ 'aria-label': 'search' }}
                 />
-
                 <div>
                     <List
                         component="nav"
                         aria-label="Device settings"
                         sx={{
                             // @ts-ignore
+                            bgcolor: theme.palette.myColor.main,
                             borderBottomRightRadius: 22,
                             borderTopRightRadius: 22,
                             p: "0",
                         }}
                     >
                         <ListItem
+
                             id="lock-button"
                             aria-haspopup="listbox"
                             aria-controls="lock-menu"
                             aria-label="when device is locked"
-                            aria-expanded={open ? "true" : undefined}
+                            aria-expanded={open ? 'true' : undefined}
                             onClick={handleClickListItem}
                         >
                             <ListItemText
-                                // className="border"
+                                //className="border"
                                 sx={{
-                                    width: 93,
+                                    width: 100,
                                     textAlign: "center",
                                     "&:hover": { cursor: "pointer" },
                                 }}
-
+                                secondary={options[selectedIndex]}
                             />
                             <ExpandMore sx={{ fontSize: "16px" }} />
                         </ListItem>
                     </List>
                     <Menu
+
                         id="lock-menu"
                         anchorEl={anchorEl}
                         open={open}
                         onClose={handleClose}
                         MenuListProps={{
-                            "aria-labelledby": "lock-button",
-                            role: "listbox",
+                            'aria-labelledby': 'lock-button',
+                            role: 'listbox',
                         }}
                     >
+                        {options.map((option, index) => (
+                            <MenuItem
+                                sx={{ fontSize: "13px" }}
+                                key={option}
 
-                        <MenuItem
-                            sx={{ fontSize: "13px" }}
-
-                        >
-
-                        </MenuItem>
-
+                                selected={index === selectedIndex}
+                                onClick={(event) => handleMenuItemClick(event, index)}
+                            >
+                                {option}
+                            </MenuItem>
+                        ))}
                     </Menu>
                 </div>
 
@@ -159,6 +172,7 @@ const HeaderOrder = () => {
                     <Person2OutlinedIcon />
                 </IconButton>
             </Stack>
+
 
         </Container>
     )

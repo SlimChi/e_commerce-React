@@ -3,6 +3,7 @@ import HeaderOrder from "./component/header/HeaderOrder";
 import HeaderFilter from "./component/header/HeaderFilter";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
+import Hero from "./component/hero/Hero";
 
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
             <Navbar/>
             <HeaderOrder/>
             <HeaderFilter/>
+
+            <Hero/>
 
         </ThemeProvider>
 
