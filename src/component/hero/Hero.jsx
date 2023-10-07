@@ -121,8 +121,8 @@ const Hero = () => {
                         </SwiperSlide>
                     ))}
                 </Swiper>
-                <Box sx={{ display: { xs: "none", md: "block", minWidth: "26.6%" } }}>
-                    <Box sx={{ position: "relative" }}>
+                <Box sx={{ display: {  xs: "none", md: "block", minWidth: "26.6%" } }}>
+                    <Box sx={{mt: 2.5, position: "relative", gap: 2  }}>
                         <img width={"100%"} src=".//images/banner-18.jpg" alt="" />
                         <div>
                             <Stack

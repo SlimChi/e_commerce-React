@@ -1,11 +1,10 @@
 import { AddShoppingCartOutlined } from "@mui/icons-material";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useState } from "react";
 
 const ProductDetails = ({ product }) => {
-    const [selectedImg, setSelectedImg] = useState(0);
+    const [selectedImg] = useState(0);
 
     return (
         <Box
@@ -26,7 +25,7 @@ const ProductDetails = ({ product }) => {
 
             <Box sx={{ py: 2, textAlign: { xs: "center", sm: "left" } }}>
                 <Typography variant="h5">
-                    {product.categoryName} <br />
+                    {product.categoryDto.categoryName} <br />
                     {product.productName}
                 </Typography>
                 <Typography my={0.4} fontSize={"22px"} color={"crimson"} variant="h6">

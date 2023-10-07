@@ -69,6 +69,7 @@ const HeaderFilter = () => {
                 alignItems: "center",
                 justifyContent: "space-between",
                 mt: 5,
+                mb:5
             }}
         >
             <Box>
@@ -153,10 +154,6 @@ const HeaderFilter = () => {
             {useMediaQuery("(min-width:1200px)") && (
                 <Stack gap={4} direction={"row"} alignItems={"center"}>
                     <Links title={"Home"} />
-                    <Links title={"Mega Menu"} />
-                    <Links title={"Full Screen Menu"} />
-                    <Links title={"pages"} />
-                    <Links title={"User Account"} />
                     <Links title={"Vendor Account"} />
                 </Stack>
             )}
@@ -193,17 +190,7 @@ const HeaderFilter = () => {
                     </IconButton>
 
                     {[
-                        { mainLink: "Home", subLinks: ["Link 1", "Link 2", "Link 3"] },
-                        { mainLink: "Mega menu", subLinks: ["Link 1", "Link 2", "Link 3"] },
-                        {
-                            mainLink: "full screen menu",
-                            subLinks: ["Link 1", "Link 2", "Link 3"],
-                        },
-                        { mainLink: "pages", subLinks: ["Link 1", "Link 2", "Link 3"] },
-                        {
-                            mainLink: "user account",
-                            subLinks: ["Link 1", "Link 2", "Link 3"],
-                        },
+
                         {
                             mainLink: "vendor account",
                             subLinks: ["Link 1", "Link 2", "Link 3"],

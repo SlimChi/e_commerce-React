@@ -1,12 +1,13 @@
 import { ExpandMore, KeyboardArrowRightOutlined } from "@mui/icons-material";
-import { Box, Paper, Typography } from "@mui/material";
+import {Box, Paper, Typography, useTheme} from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-
+import { Link } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
 const Links = ({ title }) => {
+    const theme = useTheme();
     return (
         <Box
             // className="border"
@@ -38,26 +39,6 @@ const Links = ({ title }) => {
                 <Paper sx={{ mt: 2 }} className=" ">
                     <nav aria-label="secondary mailbox folders">
                         <List>
-                            <ListItem disablePadding>
-                                <ListItemButton
-                                    sx={{
-                                        display: "flex",
-                                        p: 0,
-                                        px: 1.5,
-                                    }}
-                                >
-                                    <ListItemText
-                                        sx={{
-                                            "& .MuiTypography-root": {
-                                                fontSize: "15px",
-                                                fontWeight: 300,
-                                            },
-                                        }}
-                                        primary="Dashboard"
-                                    />
-                                    <Box flexGrow={1} />
-                                </ListItemButton>
-                            </ListItem>
 
                             <ListItem
                                 sx={{
@@ -107,15 +88,16 @@ const Links = ({ title }) => {
                                                             p: 0,
                                                             px: 1.5,
                                                         }}
-                                                    >
+                                                    >  <Link to="/add-product">Add Product</Link>
                                                         <ListItemText
                                                             sx={{
                                                                 "& .MuiTypography-root": {
                                                                     fontSize: "15px",
                                                                     fontWeight: 300,
+                                                                    bgcolor: theme.palette.primary.main,
                                                                 },
                                                             }}
-                                                            primary="Add Product"
+                                                            primary=""
                                                         />
                                                         <Box flexGrow={1} />
                                                     </ListItemButton>

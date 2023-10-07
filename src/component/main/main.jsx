@@ -1,5 +1,4 @@
-// Importez les dépendances nécessaires
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box,
     Container,
@@ -9,7 +8,8 @@ import {
     Rating,
     Typography,
     IconButton,
-    Dialog
+    Dialog,
+    CircularProgress,
 } from "@mui/material";
 import ToggleButton from '@mui/material/ToggleButton';
 import Card from '@mui/material/Card';
@@ -24,12 +24,21 @@ import ProductDetails from "./ProductDetails";
 const Main = ({ products }) => {
     const [alignment, setAlignment] = React.useState('left');
     const theme = useTheme();
+    const [open, setOpen] = React.useState(false);
+    const [selectedProduct, setSelectedProduct] = React.useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Supposons que vous chargez les données depuis une source externe (par exemple, une API).
+        // Ici, nous simulons un délai de chargement de 2 secondes.
+        setTimeout(() => {
+            setIsLoading(false); // Définir isLoading sur false une fois les données chargées
+        }, 2000); // Simule un délai de chargement de 2 secondes (à remplacer par votre logique de chargement réelle)
+    }, []);
+
     const handleAlignment = (event, newAlignment) => {
         setAlignment(newAlignment);
     }
-
-    const [open, setOpen] = React.useState(false);
-    const [selectedProduct, setSelectedProduct] = React.useState(null);
 
     const handleClickOpen = (product) => {
         setSelectedProduct(product);
@@ -40,6 +49,14 @@ const Main = ({ products }) => {
         setSelectedProduct(null);
         setOpen(false);
     };
+
+    if (isLoading) {
+        return (
+            <Box sx={{ py: 11, textAlign: "center" }}>
+                <CircularProgress />
+            </Box>
+        );
+    }
 
     return (
         <Container sx={{ py: 9 }}>
