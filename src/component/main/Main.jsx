@@ -114,7 +114,11 @@ const Main = ({ products }) => {
                             transition: "0.35s",
                         },
                     }}>
-
+                        <Typography gutterBottom variant="h6" component="div"sx={{
+                            textAlign: "center", // Centrer le texte horizontalement
+                        }}>
+                            {product.productName}
+                        </Typography>
                         <CardMedia
                             sx={{ height: 277 }}
                             image={`http://localhost:9091/products/image/${product.imageName}`}
@@ -126,11 +130,9 @@ const Main = ({ products }) => {
                                 justifyContent={"space-between"}
                                 alignItems={"center"}
                             >
-                                <Typography gutterBottom variant="h6" component="div">
-                                    {product.productName}
-                                </Typography>
-
-                                <Typography variant="subtitle1" component="p">
+                                <Typography variant="subtitle1" component="p"   sx={{
+                                    textAlign: "center", // Centrer le texte horizontalement
+                                }}>
                                     {product.price} €
                                 </Typography>
                             </Stack>

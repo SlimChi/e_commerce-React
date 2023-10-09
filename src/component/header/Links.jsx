@@ -110,15 +110,16 @@ const Links = ({ title }) => {
                                                             p: 0,
                                                             px: 1.5,
                                                         }}
-                                                    >
+                                                    >  <Link to="/edit-product">Edit Product</Link>
                                                         <ListItemText
                                                             sx={{
                                                                 "& .MuiTypography-root": {
                                                                     fontSize: "15px",
                                                                     fontWeight: 300,
+                                                                    bgcolor: theme.palette.primary.main,
                                                                 },
                                                             }}
-                                                            primary="Edit Product"
+                                                            primary=""
                                                         />
                                                         <Box flexGrow={1} />
                                                     </ListItemButton>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Main from './main';
+import Main from './Main';
 import axios from 'axios'; // Importez Axios
 
 function ViewProduct() {

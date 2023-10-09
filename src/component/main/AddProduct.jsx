@@ -4,20 +4,23 @@ import {
     Button,
     Card,
     CardContent,
-    Container,
-    CssBaseline,
     TextField,
     Typography,
     useTheme,
-    InputAdornment,
     Grid,
-    Divider,
 } from "@mui/material";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const AddProduct = ({ onClose }) => {
+const AddProduct = () => {
+    const [imagePreview, setImagePreview] = useState(null);
+
     const theme = useTheme();
+    const navigate = useNavigate();
+
     const [productData, setProductData] = useState({
         productName: "",
         description: "",
@@ -37,9 +40,18 @@ const AddProduct = ({ onClose }) => {
     };
 
     const handleImageChange = (event) => {
+        const selectedFile = event.target.files[0];
+
+        if (selectedFile) {
+            const imageURL = URL.createObjectURL(selectedFile);
+            setImagePreview(imageURL);
+        } else {
+            setImagePreview(null);
+        }
+
         setProductData({
             ...productData,
-            imageFile: event.target.files[0],
+            imageFile: selectedFile,
         });
     };
 
@@ -68,16 +80,23 @@ const AddProduct = ({ onClose }) => {
 
             console.log("Product added successfully:", response.data);
 
-            // Fermez la fenêtre de dialogue
-            onClose();
+            // Utilisez la bibliothèque react-toastify pour afficher une notification de succès
+            toast.success("Product added successfully!");
+
+            // Rediriger vers la page d'accueil après un certain délai
+            setTimeout(() => {
+                navigate("/");
+            }, 2000); // Redirection vers la page d'accueil après 3 secondes
         } catch (error) {
             console.error("Error adding product:", error);
+
+            // Utilisez la bibliothèque react-toastify pour afficher une notification d'erreur
+            toast.error("An error occurred while adding the product.");
         }
     };
 
-    // Fonction pour gérer l'annulation et fermer la fenêtre de dialogue
     const handleCancel = () => {
-        onClose();
+        // Votre logique pour annuler l'ajout du produit
     };
 
     return (
@@ -146,7 +165,10 @@ const AddProduct = ({ onClose }) => {
                                     required
                                 />
                             </Box>
-                            <label htmlFor="imageFile" style={{ display: "block", marginTop: "1rem" }}>
+                            <label
+                                htmlFor="imageFile"
+                                style={{ display: "block", marginTop: "1rem" }}
+                            >
                                 <input
                                     id="imageFile"
                                     type="file"
@@ -162,6 +184,17 @@ const AddProduct = ({ onClose }) => {
                                 >
                                     Upload Image
                                 </Button>
+                                {imagePreview && (
+                                    <img
+                                        src={imagePreview}
+                                        alt="Image Preview"
+                                        style={{
+                                            maxWidth: "40%",
+                                            marginTop: "1rem",
+                                            marginLeft: "3rem",
+                                        }}
+                                    />
+                                )}
                             </label>
                             <Box
                                 sx={{
@@ -171,7 +204,6 @@ const AddProduct = ({ onClose }) => {
                                     marginTop: "1rem",
                                 }}
                             >
-
                                 <Button
                                     type="submit"
                                     variant="contained"
@@ -187,6 +219,8 @@ const AddProduct = ({ onClose }) => {
                         </form>
                     </CardContent>
                 </Card>
+                {/* Utilisez la bibliothèque react-toastify pour afficher les notifications */}
+                <ToastContainer />
             </Grid>
         </Grid>
     );
